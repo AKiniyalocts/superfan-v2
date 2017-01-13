@@ -84,7 +84,9 @@ public class MainActivity extends AppCompatActivity implements HasComponent<Main
         modelAdapter.setDropDownViewResource(R.layout.model_item);
         binding.spinnerModel76.setAdapter(modelAdapter);
 
-        binding.spinnerModelMac.setAdapter(modelAdapter);
+        ArrayAdapter<CharSequence> modelAdapterMac = ArrayAdapter.createFromResource(this, R.array.test_models_mac, R.layout.model_item);
+        modelAdapter.setDropDownViewResource(R.layout.model_item);
+        binding.spinnerModelMac.setAdapter(modelAdapterMac);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         binding.compList.setLayoutManager(linearLayoutManager);

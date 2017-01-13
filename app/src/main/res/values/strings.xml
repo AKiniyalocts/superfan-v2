@@ -14,4 +14,9 @@
         <item>Oryxx</item>
         <item>Banaboo</item>
     </string-array>
+    <string-array name="test_models_mac">
+        <item>Macbook</item>
+        <item>Macbook Air</item>
+        <item>Macbook Pro</item>
+    </string-array>
 </resources>
