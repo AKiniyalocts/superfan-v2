@@ -1,4 +1,4 @@
-package com.akiniyalocts.superfan.dagger;
+package com.akiniyalocts.superfan.base;
 
 public interface HasComponent<T> {
     T getComponent();

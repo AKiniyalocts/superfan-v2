@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 
+import com.akiniyalocts.superfan.ui.MainInteractor;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -17,7 +18,7 @@ import okhttp3.OkHttpClient;
  */
 
 @Singleton
-@Component(modules = {ApplicationModule.class, DataModule.class, AndroidModule.class})
+@Component(modules = {ApplicationModule.class, DataModule.class, AndroidModule.class, InteractorModule.class})
 public interface ApplicationComponent {
 
     OkHttpClient okhttpclient();
@@ -31,6 +32,9 @@ public interface ApplicationComponent {
     Gson gson();
 
     Picasso picasso();
+
+    //Interactors
+    MainInteractor mainInteractor();
 
     void inject(Application app);
 }
