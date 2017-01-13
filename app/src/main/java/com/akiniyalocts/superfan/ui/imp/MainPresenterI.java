@@ -14,13 +14,17 @@ import com.akiniyalocts.superfan.ui.MainView;
 
 public class MainPresenterI extends PresenterI<MainView, MainInteractor> implements MainPresenter {
 
+    private final Callback callback;
+
     public MainPresenterI(MainView view, MainInteractor interactor) {
         super(view, interactor);
+        callback = new Callback();
     }
 
     @Override
     public void onCreateFreshState(Intent launchIntent) {
-
+        interactor.fetchProducts(callback);
+        view.toggleLoading(true);
     }
 
     @Override
@@ -41,5 +45,18 @@ public class MainPresenterI extends PresenterI<MainView, MainInteractor> impleme
     @Override
     public void onDestroy() {
 
+    }
+
+    private final class Callback implements MainInteractorI.MainCallback{
+
+        @Override
+        public void onProductsFetched() {
+            view.toggleLoading(false);
+        }
+
+        @Override
+        public void onFailure() {
+            view.toggleLoading(false);
+        }
     }
 }

@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 
+import com.akiniyalocts.superfan.network.AppleApi;
+import com.akiniyalocts.superfan.network.System76Api;
 import com.akiniyalocts.superfan.ui.MainInteractor;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -32,6 +34,10 @@ public interface ApplicationComponent {
     Gson gson();
 
     Picasso picasso();
+
+    System76Api system76Api();
+
+    AppleApi appleApi();
 
     //Interactors
     MainInteractor mainInteractor();

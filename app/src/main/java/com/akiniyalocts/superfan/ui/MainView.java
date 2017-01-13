@@ -7,4 +7,6 @@ import com.akiniyalocts.superfan.base.View;
  */
 public interface MainView extends View{
 
+    void toggleLoading(boolean loading);
+
 }

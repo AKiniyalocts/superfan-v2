@@ -4,6 +4,11 @@
 
     <data class="MainBinding">
 
+        <import type="android.view.View"/>
+
+        <variable
+            name="loading"
+            type="boolean"/>
 
     </data>
 
@@ -35,7 +40,27 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/seek_frame"
+        android:id="@+id/comp_list_frame"
+        >
 
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/comp_list"/>
+
+
+       <ProgressBar
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/loading"
+           android:visibility="@{loading ? View.VISIBLE : View.GONE}"
+           android:layout_gravity="center"/>
+
+    </FrameLayout>
 
 
     <FrameLayout
@@ -43,6 +68,7 @@
         android:layout_height="150dp"
         android:layout_alignParentBottom="true"
         android:background="@color/primary_trans"
+        android:id="@+id/seek_frame"
         >
 
         <com.devspark.robototextview.widget.RobotoTextView
@@ -62,7 +88,7 @@
             android:layout_marginLeft="@dimen/seekbar_margin"
             android:layout_marginRight="@dimen/seekbar_margin"
             android:id="@+id/seek"
-            android:max="3"
+            android:max="2"
             android:layout_gravity="center"/>
 
         <com.devspark.robototextview.widget.RobotoTextView
