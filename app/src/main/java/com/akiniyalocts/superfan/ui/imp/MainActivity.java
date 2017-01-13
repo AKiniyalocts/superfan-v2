@@ -1,9 +1,10 @@
 package com.akiniyalocts.superfan.ui.imp;
 
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.widget.ArrayAdapter;
 import android.widget.SeekBar;
 
 import com.akiniyalocts.superfan.R;
@@ -73,6 +74,18 @@ public class MainActivity extends AppCompatActivity implements HasComponent<Main
 
         binding.seek.setOnSeekBarChangeListener(seekListener);
 
+        ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this,
+                R.array.types, R.layout.type_item);
+
+        typeAdapter.setDropDownViewResource(R.layout.type_item);
+        binding.spinnerType.setAdapter(typeAdapter);
+
+        ArrayAdapter<CharSequence> modelAdapter = ArrayAdapter.createFromResource(this, R.array.test_models, R.layout.model_item);
+        modelAdapter.setDropDownViewResource(R.layout.model_item);
+        binding.spinnerModel76.setAdapter(modelAdapter);
+
+        binding.spinnerModelMac.setAdapter(modelAdapter);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         binding.compList.setLayoutManager(linearLayoutManager);
     }
@@ -81,5 +94,7 @@ public class MainActivity extends AppCompatActivity implements HasComponent<Main
     public void toggleLoading(boolean loading) {
         binding.setLoading(loading);
     }
+
+
 
 }

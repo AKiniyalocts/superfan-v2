@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Superfan</string>
+    <string name="model">Model</string>
+    <string name="vs">Vs</string>
+
+    <string-array name="types">
+        <item>Laptops</item>
+        <item>Desktops</item>
+        <item>Servers</item>
+    </string-array>
+
+    <string-array name="test_models">
+        <item>Lemur</item>
+        <item>Oryxx</item>
+        <item>Banaboo</item>
+    </string-array>
 </resources>
