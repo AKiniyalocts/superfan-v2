@@ -3,7 +3,6 @@ package com.akiniyalocts.superfan.ui.imp;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.widget.ArrayAdapter;
 import android.widget.SeekBar;
 
@@ -77,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements HasComponent<Main
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this,
                 R.array.types, R.layout.type_item);
 
+
         typeAdapter.setDropDownViewResource(R.layout.type_item);
         binding.spinnerType.setAdapter(typeAdapter);
 
@@ -88,8 +88,6 @@ public class MainActivity extends AppCompatActivity implements HasComponent<Main
         modelAdapter.setDropDownViewResource(R.layout.model_item);
         binding.spinnerModelMac.setAdapter(modelAdapterMac);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        binding.compList.setLayoutManager(linearLayoutManager);
     }
 
     @Override

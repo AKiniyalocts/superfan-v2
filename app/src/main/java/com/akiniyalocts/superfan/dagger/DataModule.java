@@ -6,6 +6,7 @@ import com.akiniyalocts.superfan.BuildConfig;
 import com.akiniyalocts.superfan.SuperfanApp;
 import com.akiniyalocts.superfan.network.AppleApi;
 import com.akiniyalocts.superfan.network.System76Api;
+import com.akiniyalocts.superfan.network.converters.ConverterFactory;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
@@ -64,9 +65,10 @@ public class DataModule {
 
     @Singleton
     @Provides
-    public System76Api githubAPI(OkHttpClient okHttpClient, Gson gson){
+    public System76Api system76Api(OkHttpClient okHttpClient, Gson gson){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(System76Api.base)
+                .addConverterFactory(new ConverterFactory())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(okHttpClient)

@@ -2,11 +2,11 @@ package com.akiniyalocts.superfan;
 
 import android.app.Application;
 
+import com.akiniyalocts.superfan.base.HasComponent;
 import com.akiniyalocts.superfan.dagger.AndroidModule;
 import com.akiniyalocts.superfan.dagger.ApplicationComponent;
 import com.akiniyalocts.superfan.dagger.DaggerApplicationComponent;
 import com.akiniyalocts.superfan.dagger.DataModule;
-import com.akiniyalocts.superfan.base.HasComponent;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;

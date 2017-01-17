@@ -1,5 +1,8 @@
 package com.akiniyalocts.superfan.network;
 
+import com.akiniyalocts.superfan.annotations.Envelope;
+import com.akiniyalocts.superfan.model.Product;
+
 import java.util.List;
 
 import retrofit2.http.GET;
@@ -13,6 +16,7 @@ public interface System76Api {
 
     String base = "https://api-v2.system76.com";
 
+    @Envelope
     @GET("/products")
-    Observable<List<Object>> getProducts();
+    Observable<List<Product>> getProducts();
 }

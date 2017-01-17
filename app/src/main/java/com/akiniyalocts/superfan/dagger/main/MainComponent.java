@@ -2,8 +2,8 @@ package com.akiniyalocts.superfan.dagger.main;
 
 import com.akiniyalocts.superfan.base.ActivityScope;
 import com.akiniyalocts.superfan.dagger.ApplicationComponent;
-import com.akiniyalocts.superfan.ui.imp.MainActivity;
 import com.akiniyalocts.superfan.ui.MainPresenter;
+import com.akiniyalocts.superfan.ui.imp.MainActivity;
 
 import dagger.Component;
 
