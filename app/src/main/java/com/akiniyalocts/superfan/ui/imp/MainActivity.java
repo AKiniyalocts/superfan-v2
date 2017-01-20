@@ -95,6 +95,21 @@ public class MainActivity extends AppCompatActivity implements HasComponent<Main
         binding.setLoading(loading);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mainPresenter.onResume();
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mainPresenter.onPause();
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mainPresenter.onDestroy();
+    }
 }

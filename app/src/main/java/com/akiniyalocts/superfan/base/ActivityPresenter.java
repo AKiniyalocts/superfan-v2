@@ -15,4 +15,6 @@ public interface ActivityPresenter {
     void onResume();
 
     void onDestroy();
+
+    void onPause();
 }

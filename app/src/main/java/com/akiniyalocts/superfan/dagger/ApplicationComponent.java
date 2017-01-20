@@ -14,6 +14,8 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import okhttp3.OkHttpClient;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by anthonykiniyalocts on 1/13/17.
@@ -32,6 +34,10 @@ public interface ApplicationComponent {
     Context context();
 
     Gson gson();
+
+    RxJavaCallAdapterFactory rxJavaCallAdapterFactory();
+
+    GsonConverterFactory gsonConverterFactory();
 
     Picasso picasso();
 
