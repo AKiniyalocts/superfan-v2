@@ -2,13 +2,19 @@ package com.akiniyalocts.superfan.ui.imp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import com.akiniyalocts.superfan.base.PresenterI;
 import com.akiniyalocts.superfan.model.AppleProduct;
 import com.akiniyalocts.superfan.model.Product;
+import com.akiniyalocts.superfan.model.TypeUtil;
 import com.akiniyalocts.superfan.ui.MainInteractor;
 import com.akiniyalocts.superfan.ui.MainPresenter;
 import com.akiniyalocts.superfan.ui.MainView;
+
+import org.antlr.runtime.tree.TreeAdaptor;
+
+import java.util.List;
 
 import io.realm.RealmResults;
 
@@ -23,6 +29,8 @@ public class MainPresenterI extends PresenterI<MainView, MainInteractor> impleme
     private final MainInteractorI.AppleListener appleListener;
 
     private final MainInteractorI.ProductListener productListener;
+
+    private static String currentType = "laptop";
 
     public MainPresenterI(MainView view, MainInteractor interactor) {
         super(view, interactor);
@@ -40,6 +48,29 @@ public class MainPresenterI extends PresenterI<MainView, MainInteractor> impleme
     @Override
     public void onCreateSavedState(Bundle savedInstanceState) {
 
+    }
+
+    @Override
+    public void onNewTypeSelected(@NonNull String type) {
+        String realmType = TypeUtil.typeForType(type);
+        currentType = realmType;
+        interactor.resetForType(realmType, callback);
+    }
+
+    @Override
+    public void onProductSelected(final String name) {
+        Product product = interactor.productSelected(name);
+        if(product != null) {
+            view.showCurrentProduct(product);
+        }
+    }
+
+    @Override
+    public void onAppleProductSelected(final String name) {
+        AppleProduct appleProduct = interactor.appleProductSelected(name);
+        if(appleProduct != null) {
+            view.showCurrentAppleProduct(appleProduct);
+        }
     }
 
     @Override
@@ -76,12 +107,22 @@ public class MainPresenterI extends PresenterI<MainView, MainInteractor> impleme
 
         @Override
         public void onProductsChanged(RealmResults<Product> products) {
-
+            interactor.productsByName(interactor.productsByType(currentType), this);
         }
 
         @Override
         public void onAppleProductsChanged(RealmResults<AppleProduct> appleProducts) {
+            interactor.appleProductsByname( interactor.appleProductsByType(currentType), this);
+        }
 
+        @Override
+        public void onProductNames(List<String> productNames) {
+            view.showProductNames(productNames);
+        }
+
+        @Override
+        public void onAppleNames(List<String> appleNames) {
+            view.showAppleNames(appleNames);
         }
     }
 

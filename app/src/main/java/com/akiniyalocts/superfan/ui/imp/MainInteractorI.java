@@ -4,9 +4,13 @@ import android.support.annotation.NonNull;
 
 import com.akiniyalocts.superfan.model.AppleProduct;
 import com.akiniyalocts.superfan.model.Product;
+import com.akiniyalocts.superfan.model.TypeUtil;
 import com.akiniyalocts.superfan.network.AppleApi;
 import com.akiniyalocts.superfan.network.System76Api;
 import com.akiniyalocts.superfan.ui.MainInteractor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
@@ -25,6 +29,10 @@ public class MainInteractorI implements MainInteractor {
         void onProductsChanged(RealmResults<Product> products);
 
         void onAppleProductsChanged(RealmResults<AppleProduct> appleProducts);
+
+        void onProductNames(List<String> productNames);
+
+        void onAppleNames(List<String> appleNames);
     }
 
     private final System76Api system76Api;
@@ -66,12 +74,23 @@ public class MainInteractorI implements MainInteractor {
     }
 
     private RealmResults<Product> filterByString(@NonNull final String field, @NonNull final String value){
-        return products.where().equalTo(field, value).findAll();
+        return products.where().equalTo(field, value).findAll().where().equalTo("active", true).findAll();
     }
 
     @Override
-    public RealmResults<Product> productsByType(@NonNull String type, final MainCallback callback) {
+    public RealmResults<Product> productsByType(@NonNull String type) {
         return filterByString("type", type);
+    }
+
+    @Override
+    public RealmResults<AppleProduct> appleProductsByType(@NonNull String type) {
+        return appleProducts.where().equalTo("type", type).findAll();
+    }
+
+    @Override
+    public void resetForType(String type, MainCallback callback) {
+        callback.onProductsChanged(productsByType(TypeUtil.typeForType(type)));
+        callback.onAppleProductsChanged(appleProductsByType(TypeUtil.typeForType(type)));
     }
 
     @Override
@@ -119,6 +138,48 @@ public class MainInteractorI implements MainInteractor {
                             callback.onFailure();
                         }
                 );
+    }
+
+    @Override
+    public void productsByName(RealmResults<Product> products, MainPresenterI.Callback callback) {
+        List<String> productNames = new ArrayList<>();
+        for(Product product: products){
+            if(!productNames.contains(product.getName())) {
+                productNames.add(product.getName());
+            }
+        }
+
+        callback.onProductNames(productNames);
+    }
+
+    @Override
+    public void appleProductsByname(RealmResults<AppleProduct> appleProducts, MainPresenterI.Callback callback) {
+        List<String> appleNames = new ArrayList<>();
+
+        for(AppleProduct appleProduct: appleProducts){
+            if(!appleNames.contains(appleProduct.getName())) {
+                appleNames.add(appleProduct.getName());
+            }
+        }
+
+        callback.onAppleNames(appleNames);
+    }
+
+
+    @Override
+    public Product productSelected(final String name) {
+        if(products.isValid() && !products.isEmpty()){
+            return products.where().equalTo("name", name).findFirst();
+        }
+        return null;
+    }
+
+    @Override
+    public AppleProduct appleProductSelected(final String name) {
+        if(appleProducts.isValid() && !appleProducts.isEmpty()){
+            return appleProducts.where().equalTo("name", name).findFirst();
+        }
+        return null;
     }
 
     public final static class AppleListener implements RealmChangeListener<RealmResults<AppleProduct>>{

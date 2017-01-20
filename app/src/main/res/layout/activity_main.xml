@@ -6,9 +6,18 @@
 
         <import type="android.view.View"/>
 
+        <import type="com.akiniyalocts.superfan.model.Product"/>
+        <import type="com.akiniyalocts.superfan.model.AppleProduct"/>
+
         <variable
             name="loading"
             type="boolean"/>
+
+        <variable
+            name="product"
+            type="Product"/>
+
+
 
     </data>
 
@@ -53,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="3">
+                android:weightSum="2">
 
                 <Spinner
                     android:id="@+id/spinner_model_76"
@@ -61,19 +70,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
 
-                <com.devspark.robototextview.widget.RobotoTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:padding="10dp"
-                    android:gravity="center"
-                    app:typeface="roboto_slab_regular"
-                    android:text="@string/vs"
-                    android:textAllCaps="true"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp"
-                    android:layout_weight="1"
-                    />
                 <Spinner
                     android:id="@+id/spinner_model_mac"
                     android:layout_width="wrap_content"
@@ -86,47 +82,87 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/seek_frame"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@+id/toolbar"
         android:id="@+id/comp_list_frame"
+        android:weightSum="2"
         >
 
-       <ImageView
-           android:layout_width="200dp"
-           android:layout_height="200dp"
-           android:id="@+id/sys_76_image"
-           android:layout_gravity="center_vertical"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-       <ProgressBar
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:id="@+id/loading"
-           android:visibility="@{loading ? View.VISIBLE : View.GONE}"
-           android:layout_gravity="center"/>
 
-    </FrameLayout>
+           <ImageView
+               android:layout_width="100dp"
+               android:layout_height="100dp"
+               android:layout_centerHorizontal="true"
+               android:layout_marginTop="20dp"
+               android:id="@+id/sys_76_image"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sys_76_image"
+                android:textColor="@color/colorAccent"
+                app:setPrice="@{product.price}"
+                android:id="@+id/product_price"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_price"
+                android:text="@{product.description}"
+                android:id="@+id/product_cpu"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_cpu"
+                android:id="@+id/product_ram"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/product_ram"
+                android:id="@+id/product_storage"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/apple_image"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/apple_image"
+                android:id="@+id/apple_description"/>
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
 
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:background="@color/primary_trans"
         android:id="@+id/seek_frame"
         >
-
-        <com.devspark.robototextview.widget.RobotoTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:padding="10dp"
-            app:typeface="roboto_slab_regular"
-            android:text="$695"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            />
 
         <android.support.v7.widget.AppCompatSeekBar
             android:layout_width="match_parent"
@@ -137,16 +173,14 @@
             android:max="2"
             android:layout_gravity="center"/>
 
-        <com.devspark.robototextview.widget.RobotoTextView
+        <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:padding="10dp"
-            app:typeface="roboto_slab_regular"
-            android:text="$999"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            />
+            android:id="@+id/loading"
+            android:visibility="@{loading ? View.VISIBLE : View.GONE}"
+            android:layout_gravity="center"/>
+
+
 
     </FrameLayout>
 

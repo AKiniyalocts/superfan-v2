@@ -21,6 +21,9 @@ public class AppleProduct extends RealmObject {
     @SerializedName("high_tier")
     private Tier high;
 
+    @SerializedName("image_url")
+    private String imageUrl;
+
     public String getName() {
         return name;
     }
@@ -59,5 +62,13 @@ public class AppleProduct extends RealmObject {
 
     public void setHigh(Tier high) {
         this.high = high;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

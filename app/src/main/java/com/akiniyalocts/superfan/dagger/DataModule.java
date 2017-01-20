@@ -11,6 +11,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
 
+import java.util.concurrent.Executors;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -20,6 +22,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Scheduler;
 import rx.schedulers.Schedulers;
 
 /**
@@ -36,7 +39,7 @@ public class DataModule {
 
     @Singleton
     @Provides
-    public OkHttpClient provideOkhttpClient(){
+    OkHttpClient provideOkhttpClient(){
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
         if (BuildConfig.DEBUG) {
@@ -51,7 +54,7 @@ public class DataModule {
 
     @Singleton
     @Provides
-    public Picasso picasso(Context context){
+    Picasso picasso(Context context){
         return new Picasso.Builder(context)
                 .loggingEnabled(BuildConfig.DEBUG)
                 .build();
@@ -59,26 +62,33 @@ public class DataModule {
 
     @Singleton
     @Provides
-    public Gson gson(){
+    Gson gson(){
         return new GsonBuilder().create();
     }
 
     @Singleton
     @Provides
-    public GsonConverterFactory gsonConverterFactory(Gson gson){
+    GsonConverterFactory gsonConverterFactory(Gson gson){
         return GsonConverterFactory.create(gson);
     }
 
     @Singleton
     @Provides
-    public RxJavaCallAdapterFactory rxJavaCallAdapterFactory(){
-        return RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io());
+    RxJavaCallAdapterFactory rxJavaCallAdapterFactory(Scheduler scheduler){
+        return RxJavaCallAdapterFactory.createWithScheduler(scheduler);
     }
+
+    @Singleton
+    @Provides
+    Scheduler provideScheduler(){
+        return Schedulers.from(Executors.newFixedThreadPool(6));
+    }
+
 
 
     @Singleton
     @Provides
-    public System76Api system76Api(OkHttpClient okHttpClient, GsonConverterFactory gsonConverterFactory, RxJavaCallAdapterFactory rxJavaCallAdapterFactory){
+    System76Api system76Api(OkHttpClient okHttpClient, GsonConverterFactory gsonConverterFactory, RxJavaCallAdapterFactory rxJavaCallAdapterFactory){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(System76Api.base)
                 .addConverterFactory(new ConverterFactory())

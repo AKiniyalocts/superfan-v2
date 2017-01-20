@@ -263,7 +263,7 @@ public class Product extends RealmObject {
         this.active = active;
     }
 
-    private String getThumbUrl(){
+    public String getThumbUrl(){
 
         StringBuilder builder = new StringBuilder();
 
