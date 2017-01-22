@@ -152,7 +152,8 @@ public class MainInteractorI implements MainInteractor {
                             if(response != null && response.specs != null){
                                 callback.onSpecsFetched(response.specs);
                             }
-                        }
+                        },
+                        throwable -> {}
                 );
     }
 
