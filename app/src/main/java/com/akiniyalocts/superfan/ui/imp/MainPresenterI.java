@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import com.akiniyalocts.superfan.base.PresenterI;
 import com.akiniyalocts.superfan.model.AppleProduct;
 import com.akiniyalocts.superfan.model.Product;
+import com.akiniyalocts.superfan.model.ProductTechSpecs;
 import com.akiniyalocts.superfan.model.TypeUtil;
 import com.akiniyalocts.superfan.ui.MainInteractor;
 import com.akiniyalocts.superfan.ui.MainPresenter;
@@ -62,6 +63,7 @@ public class MainPresenterI extends PresenterI<MainView, MainInteractor> impleme
         Product product = interactor.productSelected(name);
         if(product != null) {
             view.showCurrentProduct(product);
+            interactor.fetchSpecs(product.getId(), callback);
         }
     }
 
@@ -71,6 +73,11 @@ public class MainPresenterI extends PresenterI<MainView, MainInteractor> impleme
         if(appleProduct != null) {
             view.showCurrentAppleProduct(appleProduct);
         }
+    }
+
+    @Override
+    public void findSpecs(long id) {
+
     }
 
     @Override
@@ -123,6 +130,11 @@ public class MainPresenterI extends PresenterI<MainView, MainInteractor> impleme
         @Override
         public void onAppleNames(List<String> appleNames) {
             view.showAppleNames(appleNames);
+        }
+
+        @Override
+        public void onSpecsFetched(List<ProductTechSpecs> specs) {
+            view.showSpecs(specs);
         }
     }
 

@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.akiniyalocts.superfan.model.AppleProduct;
 import com.akiniyalocts.superfan.model.Product;
+import com.akiniyalocts.superfan.model.ProductTechSpecs;
 import com.akiniyalocts.superfan.model.TypeUtil;
 import com.akiniyalocts.superfan.network.AppleApi;
 import com.akiniyalocts.superfan.network.System76Api;
@@ -33,6 +34,8 @@ public class MainInteractorI implements MainInteractor {
         void onProductNames(List<String> productNames);
 
         void onAppleNames(List<String> appleNames);
+
+        void onSpecsFetched(List<ProductTechSpecs> specs);
     }
 
     private final System76Api system76Api;
@@ -136,6 +139,19 @@ public class MainInteractorI implements MainInteractor {
 
                         throwable -> {
                             callback.onFailure();
+                        }
+                );
+    }
+
+    @Override
+    public void fetchSpecs(long id, MainCallback callback) {
+        system76Api.getTechSpecs(id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        response -> {
+                            if(response != null && response.specs != null){
+                                callback.onSpecsFetched(response.specs);
+                            }
                         }
                 );
     }

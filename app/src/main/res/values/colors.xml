@@ -8,4 +8,8 @@
     <color name="background">#ffd696</color>
 
     <color name="primary_trans">#A0574E4A</color>
+
+    <color name="apple_red">#FA2A1A</color>
+    <color name="secondary_text">#69818C</color>
+    <color name="blue_price">#2158D6</color>
 </resources>

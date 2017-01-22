@@ -17,6 +17,7 @@ import com.akiniyalocts.superfan.dagger.main.MainModule;
 import com.akiniyalocts.superfan.databinding.MainBinding;
 import com.akiniyalocts.superfan.model.AppleProduct;
 import com.akiniyalocts.superfan.model.Product;
+import com.akiniyalocts.superfan.model.ProductTechSpecs;
 import com.akiniyalocts.superfan.ui.MainPresenter;
 import com.akiniyalocts.superfan.ui.MainView;
 import com.squareup.picasso.Picasso;
@@ -63,26 +64,6 @@ public class MainActivity extends AppCompatActivity implements HasComponent<Main
 
     @Override
     public void init() {
-
-        seekListener = new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        };
-
-        binding.seek.setOnSeekBarChangeListener(seekListener);
-
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this,
                 R.array.types, R.layout.type_item);
 
@@ -156,6 +137,12 @@ public class MainActivity extends AppCompatActivity implements HasComponent<Main
                 .fit()
                 .centerInside()
                 .into(binding.appleImage);
+        binding.setTier(appleProduct.getLow());
+    }
+
+    @Override
+    public void showSpecs(List<ProductTechSpecs> specs) {
+        com.akiniyalocts.superfan.ui.imp.MainBinding.setSpecs(binding.productCpu, specs);
     }
 
     @Override

@@ -21,6 +21,8 @@ public interface MainInteractor extends Interactor{
 
     void fetchAppleProducts(MainInteractorI.MainCallback callback);
 
+    void fetchSpecs(long id, MainInteractorI.MainCallback callback);
+
     void addChangeListeners(MainInteractorI.AppleListener appleListener, MainInteractorI.ProductListener productListener, MainInteractorI.MainCallback mainCallback);
 
     void removeChangeListeners();

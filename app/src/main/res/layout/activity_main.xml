@@ -7,7 +7,7 @@
         <import type="android.view.View"/>
 
         <import type="com.akiniyalocts.superfan.model.Product"/>
-        <import type="com.akiniyalocts.superfan.model.AppleProduct"/>
+        <import type="com.akiniyalocts.superfan.model.Tier"/>
 
         <variable
             name="loading"
@@ -17,6 +17,9 @@
             name="product"
             type="Product"/>
 
+        <variable
+            name="tier"
+            type="Tier"/>
 
 
     </data>
@@ -36,6 +39,8 @@
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -80,112 +85,126 @@
 
         </LinearLayout>
 
+
+
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_below="@+id/toolbar"
-        android:id="@+id/comp_list_frame"
-        android:weightSum="2"
-        >
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:id="@+id/scroll">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:orientation="horizontal"
+            android:id="@+id/comp_list_frame"
+            android:weightSum="2"
+            >
 
-
-           <ImageView
-               android:layout_width="100dp"
-               android:layout_height="100dp"
-               android:layout_centerHorizontal="true"
-               android:layout_marginTop="20dp"
-               android:id="@+id/sys_76_image"/>
-
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/sys_76_image"
-                android:textColor="@color/colorAccent"
-                app:setPrice="@{product.price}"
-                android:id="@+id/product_price"/>
-            <TextView
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+
+               <ImageView
+                   android:layout_width="120dp"
+                   android:layout_height="120dp"
+                   android:layout_centerHorizontal="true"
+                   android:layout_marginTop="20dp"
+                   android:id="@+id/sys_76_image"/>
+
+
+                <com.devspark.robototextview.widget.RobotoTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_price_size"
+                    android:layout_below="@id/sys_76_image"
+                    android:textColor="@color/colorAccent"
+                    app:setPrice="@{product.price}"
+                    android:layout_margin="@dimen/text_margin"
+                    app:typeface="roboto_slab_bold"
+                    android:id="@+id/product_price"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/product_price"
+                    android:textColor="@color/blue_price"
+                    android:textSize="@dimen/disclaimer_text_size"
+                    android:textAllCaps="true"
+                    android:layout_margin="@dimen/text_margin"
+                    android:text="@string/base_price"
+                    android:id="@+id/product_disclaimer"/>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/product_disclaimer"
+                    android:textColor="@color/secondary_text"
+                    android:textAllCaps="true"
+                    android:layout_margin="@dimen/text_margin"
+                    android:id="@+id/product_cpu"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/product_price"
-                android:text="@{product.description}"
-                android:id="@+id/product_cpu"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/product_cpu"
-                android:id="@+id/product_ram"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/product_ram"
-                android:id="@+id/product_storage"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="20dp"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/apple_image"/>
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/apple_image"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/apple_image"
-                android:id="@+id/apple_description"/>
+                <com.devspark.robototextview.widget.RobotoTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_price_size"
+                    android:layout_below="@id/apple_image"
+                    android:textColor="@color/apple_red"
+                    app:setPrice="@{tier.price}"
+                    android:layout_margin="@dimen/text_margin"
+                    app:typeface="roboto_slab_bold"
+                    android:id="@+id/apple_price"/>
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/apple_price"
+                    android:textColor="@color/blue_price"
+                    android:layout_margin="@dimen/text_margin"
+                    android:textSize="@dimen/disclaimer_text_size"
+                    android:textAllCaps="true"
+                    android:text="@string/base_price"
+                    android:id="@+id/apple_disclaimer"/>
 
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin"
 
-    </LinearLayout>
+                    android:layout_below="@+id/apple_disclaimer"
+                    android:textColor="@color/secondary_text"
+                    app:setTier="@{tier}"
+                    android:id="@+id/apple_stats"/>
 
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/primary_trans"
-        android:id="@+id/seek_frame"
-        >
-
-        <android.support.v7.widget.AppCompatSeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/seekbar_margin"
-            android:layout_marginRight="@dimen/seekbar_margin"
-            android:id="@+id/seek"
-            android:max="2"
-            android:layout_gravity="center"/>
-
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/loading"
-            android:visibility="@{loading ? View.VISIBLE : View.GONE}"
-            android:layout_gravity="center"/>
+            </RelativeLayout>
 
 
 
-    </FrameLayout>
-
-
-
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
 

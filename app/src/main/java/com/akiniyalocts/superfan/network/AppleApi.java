@@ -11,7 +11,7 @@ public interface AppleApi {
 
     String base = "https://api.myjson.com";
 
-    @GET("/bins/98gan")
+    @GET("/bins/1akxj3")
     Observable<AppleResponse> getProducts();
 
 }

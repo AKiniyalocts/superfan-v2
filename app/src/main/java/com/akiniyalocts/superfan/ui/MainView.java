@@ -3,6 +3,7 @@ package com.akiniyalocts.superfan.ui;
 import com.akiniyalocts.superfan.base.View;
 import com.akiniyalocts.superfan.model.AppleProduct;
 import com.akiniyalocts.superfan.model.Product;
+import com.akiniyalocts.superfan.model.ProductTechSpecs;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface MainView extends View{
     void showCurrentProduct(Product product);
 
     void showCurrentAppleProduct(AppleProduct appleProduct);
+
+    void showSpecs(List<ProductTechSpecs> specs);
 }

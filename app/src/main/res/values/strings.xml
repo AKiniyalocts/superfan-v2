@@ -2,6 +2,7 @@
     <string name="app_name">Superfan</string>
     <string name="model">Model</string>
     <string name="vs">Vs</string>
+    <string name="base_price">Base price -  \n\nwill change w/ config</string>
 
     <string-array name="types">
         <item>Laptops</item>
