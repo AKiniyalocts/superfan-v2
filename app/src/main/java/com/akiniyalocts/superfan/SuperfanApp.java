@@ -7,8 +7,8 @@ import com.akiniyalocts.superfan.dagger.AndroidModule;
 import com.akiniyalocts.superfan.dagger.ApplicationComponent;
 import com.akiniyalocts.superfan.dagger.DaggerApplicationComponent;
 import com.akiniyalocts.superfan.dagger.DataModule;
-
 import com.crashlytics.android.Crashlytics;
+
 import io.fabric.sdk.android.Fabric;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;

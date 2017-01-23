@@ -263,6 +263,17 @@ public class Product extends RealmObject {
         this.active = active;
     }
 
+
+    public String getProductUrl(){
+        StringBuilder url = new StringBuilder();
+
+        url.append("https://system76.com/")
+                .append(this.getType())
+                .append("s/")
+                .append(this.getSeries());
+
+        return url.toString();
+    }
     public String getThumbUrl(){
 
         StringBuilder builder = new StringBuilder();
@@ -276,7 +287,5 @@ public class Product extends RealmObject {
         builder.append("/thumb.png");
 
         return builder.toString();
-
-
     }
 }

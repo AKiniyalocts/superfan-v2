@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.SeekBar;
 
 import com.akiniyalocts.superfan.R;
 import com.akiniyalocts.superfan.SuperfanApp;
@@ -18,6 +17,7 @@ import com.akiniyalocts.superfan.databinding.MainBinding;
 import com.akiniyalocts.superfan.model.AppleProduct;
 import com.akiniyalocts.superfan.model.Product;
 import com.akiniyalocts.superfan.model.ProductTechSpecs;
+import com.akiniyalocts.superfan.ui.CustomTabUtil;
 import com.akiniyalocts.superfan.ui.MainPresenter;
 import com.akiniyalocts.superfan.ui.MainView;
 import com.squareup.picasso.Picasso;
@@ -50,8 +50,6 @@ public class MainActivity extends AppCompatActivity implements HasComponent<Main
 
     private MainBinding binding;
 
-    private SeekBar.OnSeekBarChangeListener seekListener;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +79,12 @@ public class MainActivity extends AppCompatActivity implements HasComponent<Main
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+        });
+
+        binding.sys76Image.setOnClickListener(v -> CustomTabUtil.startTabsIntent(this, mainPresenter.selectedProduct().getProductUrl()));
+
+        binding.appleContainer.setOnClickListener(v -> {
+
         });
 
     }

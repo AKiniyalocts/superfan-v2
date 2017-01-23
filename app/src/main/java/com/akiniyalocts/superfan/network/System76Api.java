@@ -2,7 +2,6 @@ package com.akiniyalocts.superfan.network;
 
 import com.akiniyalocts.superfan.annotations.Envelope;
 import com.akiniyalocts.superfan.model.Product;
-import com.akiniyalocts.superfan.model.ProductTechSpecs;
 
 import java.util.List;
 

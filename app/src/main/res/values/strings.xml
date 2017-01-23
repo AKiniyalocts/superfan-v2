@@ -3,6 +3,8 @@
     <string name="model">Model</string>
     <string name="vs">Vs</string>
     <string name="base_price">Base price -  \n\nwill change w/ config</string>
+    <string name="click_for_more">More...</string>
+    <string name="view_in_browser">View in browser</string>
 
     <string-array name="types">
         <item>Laptops</item>

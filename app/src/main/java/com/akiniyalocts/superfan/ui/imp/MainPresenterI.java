@@ -13,8 +13,6 @@ import com.akiniyalocts.superfan.ui.MainInteractor;
 import com.akiniyalocts.superfan.ui.MainPresenter;
 import com.akiniyalocts.superfan.ui.MainView;
 
-import org.antlr.runtime.tree.TreeAdaptor;
-
 import java.util.List;
 
 import io.realm.RealmResults;
@@ -30,6 +28,8 @@ public class MainPresenterI extends PresenterI<MainView, MainInteractor> impleme
     private final MainInteractorI.AppleListener appleListener;
 
     private final MainInteractorI.ProductListener productListener;
+
+    private Product selectedProduct;
 
     private static String currentType = "laptop";
 
@@ -61,6 +61,8 @@ public class MainPresenterI extends PresenterI<MainView, MainInteractor> impleme
     @Override
     public void onProductSelected(final String name) {
         Product product = interactor.productSelected(name);
+        this.selectedProduct = product;
+
         if(product != null) {
             view.showCurrentProduct(product);
             interactor.fetchSpecs(product.getId(), callback);
@@ -73,6 +75,11 @@ public class MainPresenterI extends PresenterI<MainView, MainInteractor> impleme
         if(appleProduct != null) {
             view.showCurrentAppleProduct(appleProduct);
         }
+    }
+
+    @Override
+    public Product selectedProduct() {
+        return this.selectedProduct;
     }
 
     @Override
