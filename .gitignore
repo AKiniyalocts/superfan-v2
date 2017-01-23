@@ -7,7 +7,6 @@ bin/
 local.properties
 .metadata/
 *.class
-*.apk
 *.res
 *.dex
 *.iml
