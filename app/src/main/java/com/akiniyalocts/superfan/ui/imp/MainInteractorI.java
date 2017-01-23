@@ -50,7 +50,7 @@ public class MainInteractorI implements MainInteractor {
         this.system76Api = system76Api;
         this.appleApi = appleApi;
 
-        products = Realm.getDefaultInstance().where(Product.class).findAllAsync();
+        products = Realm.getDefaultInstance().where(Product.class).equalTo("visible", true).findAllAsync();
         appleProducts = Realm.getDefaultInstance().where(AppleProduct.class).findAllAsync();
 
     }
@@ -77,7 +77,7 @@ public class MainInteractorI implements MainInteractor {
     }
 
     private RealmResults<Product> filterByString(@NonNull final String field, @NonNull final String value){
-        return products.where().equalTo(field, value).findAll().where().equalTo("active", true).findAll();
+        return products.where().equalTo(field, value).findAll().where().equalTo("visible", true).findAll();
     }
 
     @Override
