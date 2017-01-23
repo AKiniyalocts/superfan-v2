@@ -26,7 +26,7 @@ android {
         applicationId "com.akiniyalocts.superfan"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 4
+        versionCode 5
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
